@@ -12,7 +12,7 @@ namespace PatientManagementAndAppointmentSystem_GF.Entities
 
 
         [ForeignKey("Patient")]
-        public int? PatientId { get; set; }
+        public long? PatientId { get; set; }
         public Patient Patient { get; set; }
 
     }

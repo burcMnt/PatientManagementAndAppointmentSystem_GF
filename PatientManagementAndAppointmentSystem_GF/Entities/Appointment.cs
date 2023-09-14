@@ -14,11 +14,11 @@ namespace PatientManagementAndAppointmentSystem_GF.Entities
         //Nav prop
 
         [ForeignKey("MedicalHistory")]
-        public int? MedicalHistoryId { get; set; }
+        public long? MedicalHistoryId { get; set; }
         public MedicalHistory MedicalHistory { get; set; }
 
         [ForeignKey("Patient")]
-        public int? PatientId { get; set; }
+        public long? PatientId { get; set; }
         public Patient Patient { get; set; }
     }
 }
