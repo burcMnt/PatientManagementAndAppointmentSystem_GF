@@ -1,4 +1,5 @@
-﻿using PatientManagementAndAppointmentSystem_GF.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PatientManagementAndAppointmentSystem_GF.Data;
 using PatientManagementAndAppointmentSystem_GF.Entities;
 using PatientManagementAndAppointmentSystem_GF.Interfaces;
 
@@ -22,7 +23,7 @@ namespace PatientManagementAndAppointmentSystem_GF.Services
         public async Task Delete(long id)
         {
             var appointment = _dbContext.Appointment.FirstOrDefault(x => x.Id == id);
-            _dbContext.Appointment.(appointment);
+            _dbContext.Appointment.Remove(appointment);
             _dbContext.SaveChanges(true);
         }
 
@@ -33,7 +34,7 @@ namespace PatientManagementAndAppointmentSystem_GF.Services
 
         public async Task<List<Appointment>> ListAll()
         {
-            return _dbContext.Appointment.ToList();
+            return _dbContext.Appointment.Include(x=>x.Patient).ToList();
 
         }
 

@@ -24,7 +24,7 @@ namespace PatientManagementAndAppointmentSystem_GF.Controllers
 
 
         //You can use the HttpGet request to take all tlist
-        [HttpGet]
+        [HttpGet("GetAllAppointment")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _appointmentService.ListAll();
@@ -34,7 +34,7 @@ namespace PatientManagementAndAppointmentSystem_GF.Controllers
 
         //You can use this HttpGet request with id  to get just one object.
         //https://localhost
-        [HttpGet("{id}")]
+        [HttpGet("GetAppointmentById/{id}")]
         public async Task<IActionResult> Get(long id)
         {
 
@@ -48,7 +48,7 @@ namespace PatientManagementAndAppointmentSystem_GF.Controllers
 
         //You can use this HttpPost request to create new  object.
         //https://localhost:
-        [HttpPost]
+        [HttpPost("CreateAppointment")]
         public IActionResult Add([FromBody] AppointmentAddDto appointmentDto)
         {
             if (!ModelState.IsValid)
@@ -64,7 +64,7 @@ namespace PatientManagementAndAppointmentSystem_GF.Controllers
 
         //You can use this HttpDelete request to delete object already have with using unique id.
         //https://localhost:
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteAppointment/{id}")]
         public IActionResult Delete(long id)
         {
             _appointmentService.Delete(id);
@@ -73,8 +73,8 @@ namespace PatientManagementAndAppointmentSystem_GF.Controllers
 
         //You can use this HttpPut request to update object already have with using unique id.
         //https://localhost:
-        [HttpPut("{id}")]
-        public IActionResult Update([FromRoute] long id, [FromBody] AppointmentUpdateDto appointmentDto)
+        [HttpPut("UpdateAppointment/{id}")]
+        public IActionResult Update([FromQuery] long id, [FromBody] AppointmentUpdateDto appointmentDto)
         {
             if (id != appointmentDto.Id)
             {

@@ -1,4 +1,5 @@
-﻿using PatientManagementAndAppointmentSystem_GF.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PatientManagementAndAppointmentSystem_GF.Data;
 using PatientManagementAndAppointmentSystem_GF.Entities;
 using PatientManagementAndAppointmentSystem_GF.Interfaces;
 
@@ -14,31 +15,34 @@ namespace PatientManagementAndAppointmentSystem_GF.Services
         }
         public async Task<MedicalHistory> Add(MedicalHistory entity)
         {
-            _dbContext.Add<MedicalHistory>(entity);
+            _dbContext.MedicalHistory.Add(entity);
             _dbContext.SaveChanges();
             return entity;
         }
 
-        public async Task Delete(MedicalHistory entity)
+        public async Task Delete(long id, long patientId)
         {
-            _dbContext.Remove<MedicalHistory>(entity);
+
+            var history = _dbContext.MedicalHistory.Where(x => x.PatientId == patientId).FirstOrDefault(x => x.Id== id);
+
+            _dbContext.MedicalHistory.Remove(history);
             _dbContext.SaveChanges();
         }
 
-        public async Task<MedicalHistory> GetById(int id)
+        public async Task<MedicalHistory> GetById(long id)
         {
-            return _dbContext.Set<MedicalHistory>().Find(id);
+            return _dbContext.MedicalHistory.Include(x=>x.Patient).FirstOrDefault(x=>x.Id==id);
         }
 
         public async Task<List<MedicalHistory>> ListAll()
         {
-            return _dbContext.Set<MedicalHistory>().ToList();
+            return _dbContext.MedicalHistory.ToList();
 
         }
 
         public async Task Update(MedicalHistory entity)
         {
-            _dbContext.Update<MedicalHistory>(entity);
+            _dbContext.MedicalHistory.Update(entity);
             _dbContext.SaveChanges();
         }
     }

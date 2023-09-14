@@ -9,5 +9,7 @@ namespace PatientManagementAndAppointmentSystem_GF.Interfaces
         Task<Patient> Add(Patient entity);
         Task Update(Patient entity);
         Task Delete(long id);
+        Task<List<MedicalHistory>> GetAllPatientsHistory(long patientId);
+        Task<Patient> GetAllPatientAppointment(long patientId);
     }
 }
