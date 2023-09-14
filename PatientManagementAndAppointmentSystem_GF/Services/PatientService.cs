@@ -15,33 +15,34 @@ namespace PatientManagementAndAppointmentSystem_GF.Services
         public async Task<Patient> Add(Patient entity)
         {
 
-            _dbContext.Add<Patient>(entity);
+            _dbContext.Patient.Add(entity);
             _dbContext.SaveChanges();
             return entity;
         }
 
-        public async Task Delete(Patient entity)
+        public async Task Delete(long id)
         {
-            _dbContext.Remove<Patient>(entity);
+            var patient = _dbContext.Patient.FirstOrDefault(x => x.Id == id);
+            _dbContext.Patient.Remove(patient);
             _dbContext.SaveChanges();
         }
 
-        public async Task<Patient> GetById(int id)
+        public async Task<Patient> GetById(long id)
         {
 
-            return _dbContext.Set<Patient>().Find(id);
-                
+            return _dbContext.Patient.Find(id);
+
         }
 
         public async Task<List<Patient>> ListAll()
         {
-            return _dbContext.Set<Patient>().ToList();
+            return _dbContext.Patient.ToList();
 
         }
 
         public async Task Update(Patient entity)
         {
-            _dbContext.Update<Patient>(entity);
+            _dbContext.Patient.Update(entity);
             _dbContext.SaveChanges();
         }
     }
