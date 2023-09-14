@@ -11,10 +11,8 @@ namespace PatientManagementAndAppointmentSystem_GF.Entities
 
         public string Surname { get; set; }
 
-        [Required]
         public string Gender { get; set; }
 
-        [Required]
         public string Birthdate { get; set; }
 
         public string PhoneNumber { get; set; }
