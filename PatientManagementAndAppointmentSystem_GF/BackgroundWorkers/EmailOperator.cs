@@ -6,19 +6,17 @@ namespace PatientManagementAndAppointmentSystem_GF.BackgroundWorkers
     {
 
         private readonly IEmailService _emailService;
-        private readonly IAppointmentService _appointmentService;
 
-        public EmailOperator(IEmailService emailService, IAppointmentService appointmentService)
+        public EmailOperator(IEmailService emailService)
         {
             _emailService = emailService;
-            _appointmentService = appointmentService;
         }
 
 
         public void ArrangeAndSendMail()
         {
 
-            var appointmentlist = _appointmentService.GetAllAppointmentToReminder();
+            var appointmentlist = _emailService.GetAllAppointmentToReminder();
             foreach (var item in appointmentlist.Result)
             {
 

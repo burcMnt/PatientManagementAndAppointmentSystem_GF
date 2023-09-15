@@ -11,7 +11,6 @@ namespace PatientManagementAndAppointmentSystem_GF.Interfaces
         Task Update(Appointment entity);
         Task Delete(long id);
 
-        Task<List<ReminderDto>> GetAllAppointmentToReminder();
 
         
     }

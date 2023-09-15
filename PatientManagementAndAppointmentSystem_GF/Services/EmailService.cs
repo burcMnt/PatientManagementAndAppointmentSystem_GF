@@ -4,6 +4,7 @@ using System.Net;
 using System;
 using Microsoft.EntityFrameworkCore;
 using PatientManagementAndAppointmentSystem_GF.Data;
+using PatientManagementAndAppointmentSystem_GF.Dtos.Appointment;
 
 namespace PatientManagementAndAppointmentSystem_GF.Services
 {
@@ -31,6 +32,35 @@ namespace PatientManagementAndAppointmentSystem_GF.Services
 
                 SendMail(userName, subject, mailBody);
             }
+
+        }
+
+        public async Task<List<ReminderDto>> GetAllAppointmentToReminder()
+        {
+
+            var appointmentList = _dbContext.Appointment.Include(x => x.Patient).Where(x => x.AppointmentTime.Date == DateTime.Now.Date.AddDays(1)).ToList();
+
+            List<ReminderDto> result = new List<ReminderDto>();
+
+            foreach (var item in appointmentList)
+            {
+                var fullname = item.Patient.Name + " " + item.Patient.Surname;
+                ReminderDto reminderMailDto = new ReminderDto()
+                {
+
+                    UserName = item.Patient.Email,
+                    Subject = "Randevu Hatırlatma Mesajı",
+                    MailBody = string.Format("<p>Merhaba Sayın {0}, </p>" +
+                    "<p>{1} konumunda bulunan hastanemizde {2} tarih ve saatinde randevunuz bulunmaktadır.</p>" +
+                    "<p>Lütfen belirtilen zamanda muayene için hazır olunuz.</p>" +
+                    "<p> Sağlıklı günler dileriz. </p>", fullname, item.Location, item.AppointmentTime.ToString())
+                };
+
+
+                result.Add(reminderMailDto);
+            }
+
+            return result;
 
         }
 

@@ -75,9 +75,8 @@ app.MapControllers();
 
 var serviceProvider = builder.Services.BuildServiceProvider();
 var _emailService = serviceProvider.GetService<IEmailService>();
-var _appointmentService = serviceProvider.GetService<IAppointmentService>();
 
-RecurringJobs.SendAppoinmentReminderMail(_emailService, _appointmentService);
+RecurringJobs.SendAppoinmentReminderMail(_emailService);
 
 
 app.Run();

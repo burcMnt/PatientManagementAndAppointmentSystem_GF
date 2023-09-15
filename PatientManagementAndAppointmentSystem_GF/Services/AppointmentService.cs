@@ -46,33 +46,7 @@ namespace PatientManagementAndAppointmentSystem_GF.Services
             _dbContext.SaveChanges();
         }
 
-        public async Task<List<ReminderDto>> GetAllAppointmentToReminder()
-        {
-
-            var appointmentList = _dbContext.Appointment.Include(x => x.Patient).Where(x => x.AppointmentTime.Date == DateTime.Now.Date.AddDays(1)).ToList();
-
-            List<ReminderDto> result = new List<ReminderDto>();
-
-            foreach (var item in appointmentList)
-            {
-                var fullname = item.Patient.Name + " " + item.Patient.Surname;
-                ReminderDto reminderMailDto = new ReminderDto()
-                {
-
-                    UserName = item.Patient.Email,
-                    Subject = "Randevu Hatırlatma",
-                    MailBody = string.Format("<p>Merhaba Sayın {0}, </p>" +
-                    "<p>{1} konumunda bulunan hastanemizde {2} tarih ve saatinde randevunuz bulunmaktadır.</p>" +
-                    "<p> Sağlıklı günler dileriz. </p>", fullname, item.Location, item.AppointmentTime.ToString())
-                };
-
-
-                result.Add(reminderMailDto);
-            }
-
-            return result;
-
-        }
+        
 
 
     }
