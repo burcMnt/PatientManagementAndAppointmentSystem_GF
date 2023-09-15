@@ -1,7 +1,7 @@
 ﻿# Healthcare Provider Appointment Scheduling System Project
 
 Tamamlamış olduğum bu Web API projesinin amacı Sağlık sağlayıcılarının hastaların bilgilerini ve randevu sistemini yönetebilmesini sağlamaktır.Geliştirme aşamasında .Net 6 kullanılmıştır.
-Database olarak PostgreSQL kullanılmıştır. Code first yaklaşımı ile oluşturulan bu restfull Web API projesi aynı zamanda bilgilendirme sistemide barındırmaktadır. Hastalar için randevu oluşturulduğunda ve
+Database olarak PostgreSQL kullanılmıştır. Code first yaklaşımı ile oluşturulan bu Restfull Web API projesi aynı zamanda bilgilendirme sistemide barındırmaktadır. Hastalar için randevu oluşturulduğunda ve
 randevu tarihine bir gün kala hastalara bildirim mesajı Email yolu ile iletilmektedir. Bu hizmeti sağlamak için background-worker olarak Hangfire kullanılmıştır.
 
 ## Yüklenen Kütüphaneler
@@ -24,6 +24,6 @@ yönetebildiğimiz endpointler sağlanmıştır.
 
 -AppointmentController :Burada temel CRUD işlemleri gerçekleştirilmektedir.Hastanın randevu bilgilerine de buradan erişim sağlayıp yönetebildiğimiz endpointler sağlanmıştır.
 
-Hangfire proje çalıştığında ayağa kalkacaktır.Her gün sabah 8.30 da bir sonraki gün için oluşturulmuş randevu bilgilerini ilgililere otomatik olarak mail yolu ile göndermektedir.
-Hangfire-dashboard url : localhost:xxxx/hf-dashboard şeklinde dashboard üzerinden anlık tetiklenebilir.
+Hangfire proje ayağa kaldırıldığında otomatik olarak çalıştırılacaktır. Her gün sabah 8.30 da bir sonraki gün için oluşturulmuş randevu bilgilerini ilgililere otomatik olarak mail yolu ile göndermektedir.
+Hangfire-dashboard url : localhost:xxxx/hf-dashboard şeklinde dashboard üzerinden anlık olarak da tetiklenebilir.
 
