@@ -33,7 +33,7 @@ Hangfire-dashboard url : localhost:xxxx/hf-dashboard şeklinde dashboard üzerin
 
 ><img src="https://github.com/burcMnt/PatientManagementAndAppointmentSystem_GF/blob/master/PatientManagementAndAppointmentSystem_GF/Images/swgr1.png"/>
 ><img src="https://github.com/burcMnt/PatientManagementAndAppointmentSystem_GF/blob/master/PatientManagementAndAppointmentSystem_GF/Images/swgr2.png"/>
-><img src="https://github.com/burcMnt/PatientManagementAndAppointmentSystem_GF/blob/master/PatientManagementAndAppointmentSystem_GF/Images/swgr3png"/>
+><img src="https://github.com/burcMnt/PatientManagementAndAppointmentSystem_GF/blob/master/PatientManagementAndAppointmentSystem_GF/Images/swgr3.png"/>
 
 ## Hangfire&Cache
 
