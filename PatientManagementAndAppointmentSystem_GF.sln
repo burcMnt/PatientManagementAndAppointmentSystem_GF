@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientManagementAndAppointmentSystem_GF", "PatientManagementAndAppointmentSystem_GF\PatientManagementAndAppointmentSystem_GF.csproj", "{F3B1BC12-1C89-4858-8A28-9A39EA87DFB3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientManagementAndAppointmentSystem_GF", "PatientManagementAndAppointmentSystem_GF\PatientManagementAndAppointmentSystem_GF.csproj", "{F3B1BC12-1C89-4858-8A28-9A39EA87DFB3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F1027CAF-24A0-4910-9928-25ED1601940A}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
