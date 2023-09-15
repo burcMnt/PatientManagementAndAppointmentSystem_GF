@@ -16,9 +16,10 @@ namespace PatientManagementAndAppointmentSystem_GF.Services
         }
         public async Task<Appointment> Add(Appointment entity)
         {
-            _dbContext.Appointment.Add(entity);
+            var appointmentRecord =  _dbContext.Appointment.Add(entity);
             _dbContext.SaveChanges();
-            return entity;
+
+            return appointmentRecord.Entity;
         }
 
         public async Task Delete(long id)
@@ -60,7 +61,7 @@ namespace PatientManagementAndAppointmentSystem_GF.Services
 
                     UserName = item.Patient.Email,
                     Subject = "Randevu Hatırlatma",
-                    MailBody = string.Format("<p>Merhaba sayın {0}, </p>" +
+                    MailBody = string.Format("<p>Merhaba Sayın {0}, </p>" +
                     "<p>{1} konumunda bulunan hastanemizde {2} tarih ve saatinde randevunuz bulunmaktadır.</p>" +
                     "<p> Sağlıklı günler dileriz. </p>", fullname, item.Location, item.AppointmentTime.ToString())
                 };
@@ -72,6 +73,7 @@ namespace PatientManagementAndAppointmentSystem_GF.Services
             return result;
 
         }
+
 
     }
 

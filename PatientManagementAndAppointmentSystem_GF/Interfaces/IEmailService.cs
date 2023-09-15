@@ -4,5 +4,7 @@
     {
         void SendMail(string userName, string subject, string mailBody);
 
+        void SendCreatedNotification(long appointmentId);
+
     }
 }

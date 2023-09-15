@@ -14,11 +14,13 @@ namespace PatientManagementAndAppointmentSystem_GF.Controllers
     public class AppointmentController : ControllerBase
     {
         private readonly IAppointmentService _appointmentService;
+        private readonly IEmailService _emailService;
         private readonly IMapper _mapper;
 
-        public AppointmentController(IAppointmentService appointmentService, IMapper mapper)
+        public AppointmentController(IAppointmentService appointmentService, IEmailService emailService, IMapper mapper)
         {
             _appointmentService = appointmentService;
+            _emailService = emailService;
             _mapper = mapper;
         }
 
@@ -35,7 +37,7 @@ namespace PatientManagementAndAppointmentSystem_GF.Controllers
         //You can use this HttpGet request with id  to get just one object.
         //https://localhost
         [HttpGet("GetAppointmentById")]
-        public async Task<IActionResult> Get([FromQuery]long appointmentId)
+        public async Task<IActionResult> Get([FromQuery] long appointmentId)
         {
 
             var result = await _appointmentService.GetById(appointmentId);
@@ -57,15 +59,23 @@ namespace PatientManagementAndAppointmentSystem_GF.Controllers
             }
             var appointment = _mapper.Map<Appointment>(appointmentDto);
 
-            var Result = _appointmentService.Add(appointment);
-            return CreatedAtAction("Get", new { Id = Result.Id }, appointmentDto);
+            var record = _appointmentService.Add(appointment);
+
+            if (record.Result.Id > 0)
+            {
+                _emailService.SendCreatedNotification(record.Result.Id);
+                return CreatedAtAction("Get", new { Id = record.Result.Id }, appointmentDto);
+            }
+
+            return BadRequest("Create Operation Failed !!!");
+
 
         }
 
         //You can use this HttpDelete request to delete object already have with using unique id.
         //https://localhost:
         [HttpDelete("DeleteAppointment")]
-        public IActionResult Delete([FromQuery]long appointmentId)
+        public IActionResult Delete([FromQuery] long appointmentId)
         {
             _appointmentService.Delete(appointmentId);
             return NoContent();
