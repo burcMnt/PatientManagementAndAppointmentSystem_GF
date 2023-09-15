@@ -27,3 +27,15 @@ yönetebildiğimiz endpointler sağlanmıştır.
 Hangfire proje ayağa kaldırıldığında otomatik olarak çalıştırılacaktır. Her gün sabah 8.30 da bir sonraki gün için oluşturulmuş randevu bilgilerini ilgililere otomatik olarak mail yolu ile göndermektedir.
 Hangfire-dashboard url : localhost:xxxx/hf-dashboard şeklinde dashboard üzerinden anlık olarak da tetiklenebilir.
 
+## Swagger
+
+### Controllers
+
+><img src="https://github.com/burcMnt/PatientManagementAndAppointmentSystem_GF/blob/master/PatientManagementAndAppointmentSystem_GF/Images/swgr1.png"/>
+><img src="https://github.com/burcMnt/PatientManagementAndAppointmentSystem_GF/blob/master/PatientManagementAndAppointmentSystem_GF/Images/swgr2.png"/>
+><img src="https://github.com/burcMnt/PatientManagementAndAppointmentSystem_GF/blob/master/PatientManagementAndAppointmentSystem_GF/Images/swgr3png"/>
+
+## Hangfire&Cache
+
+><img src="https://github.com/burcMnt/PatientManagementAndAppointmentSystem_GF/blob/master/PatientManagementAndAppointmentSystem_GF/Images/hf1.png"/>
+><img src="https://github.com/burcMnt/PatientManagementAndAppointmentSystem_GF/blob/master/PatientManagementAndAppointmentSystem_GF/Images/hf2.png"/>
