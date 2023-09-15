@@ -11,6 +11,7 @@ namespace PatientManagementAndAppointmentSystem_GF
             serviceCollection.AddScoped<IPatientService, PatientService>();
             serviceCollection.AddScoped<IAppointmentService, AppointmentService>();
             serviceCollection.AddScoped<IHistoryService, HistoryService>();
+            serviceCollection.AddScoped<IEmailService, EmailService>();
         }
     }
 }

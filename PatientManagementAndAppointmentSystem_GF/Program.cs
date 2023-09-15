@@ -3,7 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using PatientManagementAndAppointmentSystem_GF;
 using PatientManagementAndAppointmentSystem_GF.Data;
 using Newtonsoft.Json.Serialization;
-
+using Hangfire;
+using Hangfire.MemoryStorage;
+using Microsoft.OpenApi.Models;
+using PatientManagementAndAppointmentSystem_GF.Interfaces;
+using PatientManagementAndAppointmentSystem_GF.BackgroundWorkers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +16,15 @@ var builder = WebApplication.CreateBuilder(args);
 //Db context connection
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseNpgsql(builder.Configuration.GetConnectionString("ApplicationDbContext"), b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+
+
+//Hangfire Configuration
+builder.Services.AddHangfire(x => x.SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+.UseSimpleAssemblyNameTypeSerializer()
+.UseDefaultTypeSerializer()
+.UseMemoryStorage());
+
+builder.Services.AddHangfireServer();
 
 //Extention class for Interface and services
 builder.Services.AddAllServices();
@@ -27,14 +40,21 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
  options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore).AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
-
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
  options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 
 
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c=>            
+    {
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "HealthCareSystemAPI",
+        Version = "v1"
+    });
+});
 
 var app = builder.Build();
 
@@ -42,13 +62,23 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint
+        ("/swagger/v1/swagger.json", "HealthCareSystemAPI"));
 }
 
+app.UseHangfireDashboard("/hf-dashboard");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
 
+var serviceProvider = builder.Services.BuildServiceProvider();
+var _emailService = serviceProvider.GetService<IEmailService>();
+var _appointmentService = serviceProvider.GetService<IAppointmentService>();
+
+RecurringJobs.SendAppoinmentReminderMail(_emailService, _appointmentService);
+
+
 app.Run();
+

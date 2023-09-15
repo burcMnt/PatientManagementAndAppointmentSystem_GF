@@ -34,11 +34,11 @@ namespace PatientManagementAndAppointmentSystem_GF.Controllers
 
         //You can use this HttpGet request with id  to get just one object.
         //https://localhost
-        [HttpGet("GetAppointmentById/{id}")]
-        public async Task<IActionResult> Get(long id)
+        [HttpGet("GetAppointmentById")]
+        public async Task<IActionResult> Get([FromQuery]long appointmentId)
         {
 
-            var result = await _appointmentService.GetById(id);
+            var result = await _appointmentService.GetById(appointmentId);
             if (result == null)
             {
                 return NotFound();
@@ -64,19 +64,19 @@ namespace PatientManagementAndAppointmentSystem_GF.Controllers
 
         //You can use this HttpDelete request to delete object already have with using unique id.
         //https://localhost:
-        [HttpDelete("DeleteAppointment/{id}")]
-        public IActionResult Delete(long id)
+        [HttpDelete("DeleteAppointment")]
+        public IActionResult Delete([FromQuery]long appointmentId)
         {
-            _appointmentService.Delete(id);
+            _appointmentService.Delete(appointmentId);
             return NoContent();
         }
 
         //You can use this HttpPut request to update object already have with using unique id.
         //https://localhost:
-        [HttpPut("UpdateAppointment/{id}")]
-        public IActionResult Update([FromQuery] long id, [FromBody] AppointmentUpdateDto appointmentDto)
+        [HttpPut("UpdateAppointment")]
+        public IActionResult Update([FromQuery] long appointmentId, [FromBody] AppointmentUpdateDto appointmentDto)
         {
-            if (id != appointmentDto.Id)
+            if (appointmentId != appointmentDto.Id)
             {
                 return BadRequest("Id information is not confirmed");
             }

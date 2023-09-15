@@ -20,18 +20,18 @@ namespace PatientManagementAndAppointmentSystem_GF.Services
             return entity;
         }
 
-        public async Task Delete(long id, long patientId)
+        public async Task Delete(long historyId, long patientId)
         {
 
-            var history = _dbContext.MedicalHistory.Where(x => x.PatientId == patientId).FirstOrDefault(x => x.Id== id);
+            var history = _dbContext.MedicalHistory.Where(x => x.PatientId == patientId).FirstOrDefault(x => x.Id== historyId);
 
             _dbContext.MedicalHistory.Remove(history);
             _dbContext.SaveChanges();
         }
 
-        public async Task<MedicalHistory> GetById(long id)
+        public async Task<MedicalHistory> GetById(long historyId)
         {
-            return _dbContext.MedicalHistory.Include(x=>x.Patient).FirstOrDefault(x=>x.Id==id);
+            return _dbContext.MedicalHistory.Include(x=>x.Patient).FirstOrDefault(x=>x.Id== historyId);
         }
 
         public async Task<List<MedicalHistory>> ListAll()
