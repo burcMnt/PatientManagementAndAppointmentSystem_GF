@@ -6,13 +6,21 @@ oluşturulduğunda ve randevu tarihine bir gün kala hastalara bildirim mesajı 
 
 ## Yüklenen Kütüphaneler
 -Microsoft.EntityFrameworkCore
+
 -Microsoft.EntityFrameworkCore.Tools
+
 -Npgsql.EntityFrameworkCore.PostgreSQL
+
 -AutoMapper
+
 -AutoMapper.Extensions.Microsoft.DependencyInjection
+
 -Hangfire
+
 -Hangfire.MemoryStorage
+
 -Newtonsoft.Json
+
 
 Code-First olarak ilerlendiğinden proje indirildikten sonra database ve table oluşumu için Consola aşadaki kod yazılarak çalıştırılıp Db oluşturulmalıdır.
 
